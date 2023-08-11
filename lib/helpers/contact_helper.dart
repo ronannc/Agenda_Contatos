@@ -21,7 +21,6 @@ class ContactHelper {
 
       _db = await initDb();
       return _db;
-
   }
 
   Future<Database> initDb() async {
@@ -90,13 +89,13 @@ class ContactHelper {
 }
 
 class Contact {
-  Contact({this.id, required this.name, required this.phone, required this.email, this.img});
-
   int? id;
   late String name;
   late String email;
   late String phone;
   String? img;
+
+  Contact({this.id, required this.name, required this.phone, required this.email, this.img});
 
   Contact.fromMap(Map map) {
     id = map[idColumn];

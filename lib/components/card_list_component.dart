@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:agenda_contatos/components/circle_image.dart';
 import 'package:agenda_contatos/helpers/contact_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +18,28 @@ class CardListComponent extends StatelessWidget {
           padding: EdgeInsets.all(10),
           child: Row(
             children: [
-              Text(contact.name),
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('images/no_image.jpg'),
-                  ),
+              const CircleImage(),
+              Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      contact.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20
+                      ),
+                    ),
+                    Text(
+                      contact.email,
+                    ),
+                    Text(
+                      contact.phone,
+                    ),
+                  ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -35,3 +47,4 @@ class CardListComponent extends StatelessWidget {
     );
   }
 }
+
