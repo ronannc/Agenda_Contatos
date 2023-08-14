@@ -4,9 +4,8 @@ import 'package:agenda_contatos/ui/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp( MaterialApp(
-    // home: HomePage(),
-    home: ContactPage(contact:  Contact(name: 'asdf', phone: '324234234', email: 'safsadfsa@email')),
+  runApp( const MaterialApp(
+    home: HomePage(),
     debugShowCheckedModeBanner: false,
   ));
 }

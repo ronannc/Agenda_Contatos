@@ -1,6 +1,7 @@
 import 'package:agenda_contatos/components/card_list_component.dart';
 import 'package:agenda_contatos/components/layout/my_scaffold.dart';
 import 'package:agenda_contatos/helpers/contact_helper.dart';
+import 'package:agenda_contatos/ui/contact_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    contactHelper.saveContact(Contact(name: 'Ronan', phone: '23423424', email: 'email'));
+
     _setContacts();
     super.initState();
   }
@@ -27,7 +28,9 @@ class _HomePageState extends State<HomePage> {
     return MyScaffold(
       title: 'Contatos',
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _contactPageNavigator();
+        },
         backgroundColor: Colors.deepOrangeAccent,
         child: const Icon(Icons.add),
       ),
@@ -39,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               shrinkWrap: true,
               padding: const EdgeInsets.all(10),
               children: [
-                for (Contact contact in contacts) CardListComponent(contact: contact),
+                for (Contact contact in contacts) CardListComponent(contact: contact, contactPageNavigator: _contactPageNavigator),
               ],
             ),
           ),
@@ -48,11 +51,15 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _setContacts() {
+  void _setContacts() {
     contactHelper.getAllContacts().then((value) {
       setState(() {
         contacts = value;
       });
     });
+  }
+
+  void _contactPageNavigator({Contact? contact}){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ContactPage(contact: contact, voidCallback: _setContacts,)));
   }
 }
